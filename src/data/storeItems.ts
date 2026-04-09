@@ -19,14 +19,10 @@ export const storeItems: StoreItem[] = [
     color: "hsl(145, 80%, 42%)",
     popular: true,
     features: [
-      "/fly everywhere",
-      "Custom nickname",
-      "Colored chat",
-      "Unlimited /sethome",
-      "Zelo+ Kit",
+      "/fly in lobby",
+      "3 extra /sethomes",
+      "Shards everywhere",
       "Priority queue",
-      "Particle effects",
-      "Pet companion",
     ],
   },
   {
