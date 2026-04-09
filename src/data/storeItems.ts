@@ -50,3 +50,4 @@ export const storeItems: StoreItem[] = [
     color: "hsl(280, 80%, 55%)",
     popular: true,
   },
+];
