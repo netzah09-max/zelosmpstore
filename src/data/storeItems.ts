@@ -50,10 +50,3 @@ export const storeItems: StoreItem[] = [
     color: "hsl(280, 80%, 55%)",
     popular: true,
   },
-];
-    description: "Unlock a legendary crate for the rarest loot.",
-    price: 12.99,
-    category: "crate-keys",
-    color: "hsl(45, 100%, 55%)",
-  },
-];
