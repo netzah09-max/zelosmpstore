@@ -70,16 +70,6 @@ const Store = () => {
           ))}
         </div>
 
-        {/* Username Input */}
-        <div className="mt-12 glass-card p-6 max-w-md mx-auto text-center">
-          <h3 className="text-foreground font-bold mb-2">Enter your Minecraft username</h3>
-          <p className="text-muted-foreground text-sm mb-4">Required to deliver your items in-game</p>
-          <input
-            type="text"
-            placeholder="Username"
-            className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-          />
-        </div>
       </div>
 
       <Footer />
