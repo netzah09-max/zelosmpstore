@@ -1,4 +1,5 @@
 import { X, Trash2, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "@/hooks/useCart";
 
 interface CartSidebarProps {
@@ -8,6 +9,7 @@ interface CartSidebarProps {
 
 const CartSidebar = ({ open, onClose }: CartSidebarProps) => {
   const { items, removeItem, clearCart, total } = useCart();
+  const navigate = useNavigate();
 
   if (!open) return null;
 
@@ -48,7 +50,10 @@ const CartSidebar = ({ open, onClose }: CartSidebarProps) => {
               <span>Total</span>
               <span>${total.toFixed(2)}</span>
             </div>
-            <button className="w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:bg-primary/90 transition-colors">
+            <button
+              onClick={() => { onClose(); navigate("/checkout"); }}
+              className="w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:bg-primary/90 transition-colors"
+            >
               Checkout
             </button>
             <button onClick={clearCart} className="w-full text-muted-foreground text-sm hover:text-destructive transition-colors">

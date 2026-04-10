@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/hooks/useCart";
 import Index from "./pages/Index.tsx";
 import Store from "./pages/Store.tsx";
+import Checkout from "./pages/Checkout.tsx";
+import Payment from "./pages/Payment.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -20,6 +22,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/store" element={<Store />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
