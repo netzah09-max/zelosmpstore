@@ -54,7 +54,7 @@ const Payment = () => {
 
           {/* Card */}
           <button
-            onClick={() => {/* payment integration */}}
+            onClick={() => navigate("/pay/card", { state: { ign } })}
             className="w-full bg-card border border-border rounded-xl p-5 flex items-center gap-4 hover:border-primary/50 hover:bg-secondary transition-all group"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
@@ -68,7 +68,7 @@ const Payment = () => {
 
           {/* PayPal */}
           <button
-            onClick={() => {/* payment integration */}}
+            onClick={() => navigate("/pay/paypal", { state: { ign } })}
             className="w-full bg-card border border-border rounded-xl p-5 flex items-center gap-4 hover:border-primary/50 hover:bg-secondary transition-all group"
           >
             <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition-colors">
