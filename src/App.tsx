@@ -8,6 +8,9 @@ import Index from "./pages/Index.tsx";
 import Store from "./pages/Store.tsx";
 import Checkout from "./pages/Checkout.tsx";
 import Payment from "./pages/Payment.tsx";
+import PayCard from "./pages/PayCard.tsx";
+import PayPaypal from "./pages/PayPaypal.tsx";
+import OrderComplete from "./pages/OrderComplete.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
             <Route path="/store" element={<Store />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/pay/card" element={<PayCard />} />
+            <Route path="/pay/paypal" element={<PayPaypal />} />
+            <Route path="/order-complete" element={<OrderComplete />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
