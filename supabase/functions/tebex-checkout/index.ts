@@ -1,4 +1,7 @@
-import { corsHeaders } from "@supabase/supabase-js/cors";
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
 
 const TEBEX_PUBLIC_TOKEN = "12k7z-7b51c4e7c5ed1f991e8003da04adfc778046318f";
 const HEADLESS_API = `https://headless.tebex.io/api/accounts/${TEBEX_PUBLIC_TOKEN}`;
