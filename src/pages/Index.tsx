@@ -31,25 +31,24 @@ const Index = () => {
             The ultimate Minecraft experience awaits
           </p>
           <ServerIPBadge />
-          <a
-            href="https://discord.gg/H4wrkt9A9t"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
-          >
-            Join our Discord
-          </a>
         </div>
       </section>
 
       {/* Cards Grid */}
       <section className="container py-12 -mt-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <LinkCard
             title="Store"
             subtitle="Browse ranks & crate keys"
             image={storeCard}
             to="/store"
+          />
+          <LinkCard
+            title="Discord"
+            subtitle="Join our community"
+            image={statsCard}
+            to="https://discord.gg/H4wrkt9A9t"
+            external
           />
           <LinkCard
             title="Stats"
