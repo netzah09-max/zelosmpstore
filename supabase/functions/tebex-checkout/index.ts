@@ -39,9 +39,21 @@ Deno.serve(async (req) => {
       }),
     });
 
-    const basketData = await basketRes.json();
+    const basketText = await basketRes.text();
+    console.log("Basket response status:", basketRes.status);
+    console.log("Basket response:", basketText.substring(0, 500));
+
+    let basketData;
+    try {
+      basketData = JSON.parse(basketText);
+    } catch {
+      return new Response(JSON.stringify({ error: "Tebex returned invalid response", details: basketText.substring(0, 200) }), {
+        status: 502,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     if (!basketRes.ok) {
-      console.error("Basket creation failed:", basketData);
       return new Response(JSON.stringify({ error: "Failed to create basket", details: basketData }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -63,25 +75,23 @@ Deno.serve(async (req) => {
         }),
       });
 
-      const addData = await addRes.json();
-      if (!addRes.ok) {
-        console.error(`Failed to add package ${item.tebexId}:`, addData);
-      }
+      const addText = await addRes.text();
+      console.log(`Add package ${item.tebexId} status:`, addRes.status, addText.substring(0, 200));
     }
 
-    // 3. Get auth/checkout URL
-    const authRes = await fetch(
-      `${HEADLESS_API}/baskets/${basketIdent}/auth?returnUrl=${encodeURIComponent(
-        completeUrl || "https://zelosmpstore.lovable.app/order-complete"
-      )}`
-    );
-    const authData = await authRes.json();
-
-    // The checkout links are in the basket data
+    // 3. Get checkout URL from basket
     const linksRes = await fetch(`${HEADLESS_API}/baskets/${basketIdent}`);
-    const linksData = await linksRes.json();
+    const linksText = await linksRes.text();
+    console.log("Links response:", linksText.substring(0, 500));
+    
+    let linksData;
+    try {
+      linksData = JSON.parse(linksText);
+    } catch {
+      // fallback
+    }
 
-    const checkoutUrl = linksData.data?.links?.checkout || authData?.data?.[0]?.url || `https://zelosmp.tebex.io`;
+    const checkoutUrl = linksData?.data?.links?.checkout || `https://checkout.tebex.io/checkout/${basketIdent}`;
 
     return new Response(JSON.stringify({ checkoutUrl, basketIdent }), {
       status: 200,
