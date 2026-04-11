@@ -1,5 +1,6 @@
 export interface StoreItem {
   id: string;
+  tebexId: number;
   name: string;
   description: string;
   price: number;
@@ -12,11 +13,12 @@ export interface StoreItem {
 export const storeItems: StoreItem[] = [
   {
     id: "zelo-plus",
+    tebexId: 7385604,
     name: "ZELO+",
     description: "The exclusive ZeloSMP rank. Unlock all premium perks.",
     price: 4.99,
     category: "ranks",
-    color: "hsl(145, 80%, 42%)",
+    color: "hsl(0, 80%, 50%)",
     popular: true,
     features: [
       "/fly in lobby",
@@ -27,6 +29,7 @@ export const storeItems: StoreItem[] = [
   },
   {
     id: "common-key",
+    tebexId: 7385606,
     name: "Common Key",
     description: "Unlock a common crate for basic rewards.",
     price: 0.99,
@@ -35,14 +38,16 @@ export const storeItems: StoreItem[] = [
   },
   {
     id: "spawners-key",
+    tebexId: 7385607,
     name: "Spawners Key",
     description: "Unlock a spawners crate for mob spawner loot.",
     price: 1.99,
     category: "crate-keys",
-    color: "hsl(145, 70%, 45%)",
+    color: "hsl(0, 80%, 50%)",
   },
   {
     id: "amethyst-key",
+    tebexId: 7385611,
     name: "Amethyst Key",
     description: "Unlock the amethyst crate for the rarest loot.",
     price: 2.99,
