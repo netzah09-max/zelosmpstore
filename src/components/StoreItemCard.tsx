@@ -8,7 +8,7 @@ const StoreItemCard = ({ item }: { item: StoreItem }) => {
   const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
-    addItem({ id: item.id, name: item.name, price: item.price, category: item.category });
+    addItem({ id: item.id, tebexId: item.tebexId, name: item.name, price: item.price, category: item.category });
     setAdded(true);
     setTimeout(() => setAdded(false), 1200);
   };

@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/hooks/useCart";
+import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ShoppingCart, User, AlertTriangle } from "lucide-react";
+import { ShoppingCart, User, AlertTriangle, Loader2 } from "lucide-react";
 
 const Checkout = () => {
   const { items, total } = useCart();
   const navigate = useNavigate();
   const [ign, setIgn] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   if (items.length === 0) {
     return (
@@ -37,9 +40,37 @@ const Checkout = () => {
     setShowConfirm(true);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     setShowConfirm(false);
-    window.location.href = "https://zelosmp.tebex.io";
+    setLoading(true);
+    setError("");
+
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke("tebex-checkout", {
+        body: {
+          items: items.map((i) => ({ tebexId: i.tebexId, quantity: i.quantity })),
+          ign: ign.trim(),
+          completeUrl: `${window.location.origin}/order-complete`,
+          cancelUrl: `${window.location.origin}/store`,
+        },
+      });
+
+      if (fnError) throw fnError;
+      if (data?.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        // Fallback to direct Tebex store
+        window.location.href = "https://zelosmp.tebex.io";
+      }
+    } catch (err: any) {
+      console.error("Checkout error:", err);
+      setError("Something went wrong. Redirecting to store...");
+      setTimeout(() => {
+        window.location.href = "https://zelosmp.tebex.io";
+      }, 2000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,12 +116,22 @@ const Checkout = () => {
             />
           </div>
 
+          {error && (
+            <p className="text-destructive text-sm text-center">{error}</p>
+          )}
+
           <button
             onClick={handleCompletePurchase}
-            disabled={!ign.trim()}
-            className="w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!ign.trim() || loading}
+            className="w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            Complete Purchase
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" /> Creating checkout...
+              </>
+            ) : (
+              "Proceed to Checkout"
+            )}
           </button>
         </div>
       </div>
