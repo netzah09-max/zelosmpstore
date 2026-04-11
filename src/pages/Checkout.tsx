@@ -39,7 +39,7 @@ const Checkout = () => {
 
   const handleConfirm = () => {
     setShowConfirm(false);
-    navigate("/payment", { state: { ign: ign.trim() } });
+    window.location.href = "https://zelosmp.tebex.io";
   };
 
   return (

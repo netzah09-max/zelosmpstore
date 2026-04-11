@@ -31,6 +31,14 @@ const Index = () => {
             The ultimate Minecraft experience awaits
           </p>
           <ServerIPBadge />
+          <a
+            href="https://discord.gg/H4wrkt9A9t"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            Join our Discord
+          </a>
         </div>
       </section>
 

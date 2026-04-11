@@ -54,7 +54,7 @@ const CartSidebar = ({ open, onClose }: CartSidebarProps) => {
               onClick={() => { onClose(); navigate("/checkout"); }}
               className="w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:bg-primary/90 transition-colors"
             >
-              Checkout
+              Proceed to Checkout
             </button>
             <button onClick={clearCart} className="w-full text-muted-foreground text-sm hover:text-destructive transition-colors">
               Clear Cart
