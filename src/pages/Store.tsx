@@ -1,17 +1,38 @@
-import { useState } from "react";
-import { ShoppingCart, Crown, Key } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ShoppingCart, Crown, Key, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StoreItemCard from "@/components/StoreItemCard";
 import CartSidebar from "@/components/CartSidebar";
-import { storeItems } from "@/data/storeItems";
 import { useCart } from "@/hooks/useCart";
+import { supabase } from "@/integrations/supabase/client";
+import type { StoreItem } from "@/data/storeItems";
+import { storeItems as fallbackItems } from "@/data/storeItems";
 
 const Store = () => {
   const [category, setCategory] = useState<"ranks" | "crate-keys">("ranks");
   const [cartOpen, setCartOpen] = useState(false);
+  const [storeItems, setStoreItems] = useState<StoreItem[]>(fallbackItems);
+  const [loading, setLoading] = useState(true);
   const { items } = useCart();
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke("tebex-packages");
+        if (error) throw error;
+        if (data?.packages && data.packages.length > 0) {
+          setStoreItems(data.packages);
+        }
+      } catch (err) {
+        console.error("Failed to fetch packages, using fallback:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPackages();
+  }, []);
 
   const filtered = storeItems.filter((item) => item.category === category);
 
@@ -64,12 +85,22 @@ const Store = () => {
         </div>
 
         {/* Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {filtered.map((item) => (
-            <StoreItemCard key={item.id} item={item} />
-          ))}
-        </div>
-
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 text-primary animate-spin" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {filtered.map((item) => (
+              <StoreItemCard key={item.id} item={item} />
+            ))}
+            {filtered.length === 0 && (
+              <p className="text-muted-foreground text-sm col-span-full text-center py-12">
+                No items in this category yet.
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       <Footer />
