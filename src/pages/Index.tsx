@@ -2,6 +2,7 @@ import heroBanner from "@/assets/hero-banner.jpg";
 import storeCard from "@/assets/store-card.jpg";
 import statsCard from "@/assets/stats-card.jpg";
 import joinCard from "@/assets/join-card.jpg";
+import discordCard from "@/assets/discord-card.png";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServerIPBadge from "@/components/ServerIPBadge";
@@ -46,7 +47,7 @@ const Index = () => {
           <LinkCard
             title="Discord"
             subtitle="Join our community"
-            image={statsCard}
+            image={discordCard}
             to="https://discord.gg/H4wrkt9A9t"
             external
           />
