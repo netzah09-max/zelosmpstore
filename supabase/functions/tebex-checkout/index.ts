@@ -5,6 +5,7 @@ const corsHeaders = {
 
 const TEBEX_PUBLIC_TOKEN = "12k7z-7b51c4e7c5ed1f991e8003da04adfc778046318f";
 const HEADLESS_API = `https://headless.tebex.io/api/accounts/${TEBEX_PUBLIC_TOKEN}`;
+const HEADLESS_BASE = "https://headless.tebex.io/api";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -63,9 +64,9 @@ Deno.serve(async (req) => {
     const basketIdent = basketData.data.ident;
     const usernameId = basketData.data.username_id;
 
-    // 2. Add each package to the basket
+    // 2. Add each package to the basket (use /baskets/{ident}/packages without account token)
     for (const item of items) {
-      const addRes = await fetch(`${HEADLESS_API}/baskets/${basketIdent}/packages`, {
+      const addRes = await fetch(`${HEADLESS_BASE}/baskets/${basketIdent}/packages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -76,11 +77,15 @@ Deno.serve(async (req) => {
       });
 
       const addText = await addRes.text();
-      console.log(`Add package ${item.tebexId} status:`, addRes.status, addText.substring(0, 200));
+      console.log(`Add package ${item.tebexId} status:`, addRes.status, addText.substring(0, 300));
+
+      if (!addRes.ok) {
+        console.error(`Failed to add package ${item.tebexId}:`, addText.substring(0, 500));
+      }
     }
 
     // 3. Get checkout URL from basket
-    const linksRes = await fetch(`${HEADLESS_API}/baskets/${basketIdent}`);
+    const linksRes = await fetch(`${HEADLESS_BASE}/baskets/${basketIdent}`);
     const linksText = await linksRes.text();
     console.log("Links response:", linksText.substring(0, 500));
     
