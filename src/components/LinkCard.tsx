@@ -27,9 +27,9 @@ const LinkCard = ({ title, subtitle, image, to, external }: LinkCardProps) => {
 
   if (external) {
     return (
-      <a href={to} target="_blank" rel="noopener noreferrer">
+      <div onClick={() => window.open(to, '_blank', 'noopener,noreferrer')}>
         {content}
-      </a>
+      </div>
     );
   }
 
