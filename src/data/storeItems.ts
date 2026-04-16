@@ -14,7 +14,7 @@ export const storeItems: StoreItem[] = [
   {
     id: "zelo-plus",
     tebexId: 7385604,
-    name: "Donut+ Rank",
+    name: "Zelo+ Rank",
     description: "(30 Day Subscription)",
     price: 4.99,
     category: "ranks",
