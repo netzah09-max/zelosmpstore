@@ -2,7 +2,7 @@ import heroBanner from "@/assets/hero-banner.jpg";
 import storeCard from "@/assets/store-card.jpg";
 import statsCard from "@/assets/stats-card.jpg";
 import joinCard from "@/assets/join-card.jpg";
-import discordCard from "@/assets/discord-card.png";
+import DiscordBadge from "@/components/DiscordBadge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServerIPBadge from "@/components/ServerIPBadge";
@@ -31,7 +31,10 @@ const Index = () => {
           <p className="text-muted-foreground text-lg max-w-md mx-auto">
             The ultimate Minecraft experience awaits
           </p>
-          <ServerIPBadge />
+          <div className="flex flex-col sm:flex-row items-center gap-3 justify-center">
+            <ServerIPBadge />
+            <DiscordBadge />
+          </div>
         </div>
       </section>
 
@@ -43,13 +46,6 @@ const Index = () => {
             subtitle="Browse ranks & crate keys"
             image={storeCard}
             to="/store"
-          />
-          <LinkCard
-            title="Discord"
-            subtitle="Join our community"
-            image={discordCard}
-            to="https://discord.gg/H4wrkt9A9t"
-            external
           />
           <LinkCard
             title="Stats"
