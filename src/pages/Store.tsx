@@ -23,7 +23,21 @@ const Store = () => {
         const { data, error } = await supabase.functions.invoke("tebex-packages");
         if (error) throw error;
         if (data?.packages && data.packages.length > 0) {
-          setStoreItems(data.packages);
+          const merged = data.packages.map((pkg: StoreItem) => {
+            const local = fallbackItems.find((f) => f.tebexId === pkg.tebexId);
+            if (local) {
+              return {
+                ...pkg,
+                name: local.name,
+                description: local.description,
+                features: local.features,
+                color: local.color,
+                popular: local.popular,
+              };
+            }
+            return pkg;
+          });
+          setStoreItems(merged);
         }
       } catch (err) {
         console.error("Failed to fetch packages, using fallback:", err);
