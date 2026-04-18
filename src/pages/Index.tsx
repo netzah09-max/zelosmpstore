@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServerIPBadge from "@/components/ServerIPBadge";
 import LinkCard from "@/components/LinkCard";
+import { Twitch } from "lucide-react";
 
 const Index = () => {
   return (
@@ -58,6 +59,14 @@ const Index = () => {
             subtitle="zelosmp.serv.cx"
             image={joinCard}
             to="/"
+          />
+          <LinkCard
+            title="Twitch"
+            subtitle="Follow @officalzelonet"
+            icon={Twitch}
+            iconColor="#9146FF"
+            to="https://www.twitch.tv/officalzelonet"
+            external
           />
         </div>
       </section>
