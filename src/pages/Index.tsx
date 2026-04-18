@@ -60,6 +60,14 @@ const Index = () => {
             image={joinCard}
             to="/"
           />
+          <LinkCard
+            title="Twitch"
+            subtitle="Follow @officalzelonet"
+            icon={Twitch}
+            iconColor="#9146FF"
+            to="https://www.twitch.tv/officalzelonet"
+            external
+          />
         </div>
       </section>
 
