@@ -61,10 +61,11 @@ const Index = () => {
             to="/"
           />
           <LinkCard
-            title="Twitch"
+            title="JOIN OFFICALZELONET ON TWITCH"
             subtitle="Follow @officalzelonet"
             icon={Twitch}
-            iconColor="#9146FF"
+            iconColor="#ffffff"
+            bgColor="#9146FF"
             to="https://www.twitch.tv/officalzelonet"
             external
           />
