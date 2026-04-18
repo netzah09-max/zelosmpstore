@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServerIPBadge from "@/components/ServerIPBadge";
 import LinkCard from "@/components/LinkCard";
+import { Twitch } from "lucide-react";
 
 const Index = () => {
   return (
