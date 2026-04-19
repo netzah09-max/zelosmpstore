@@ -58,7 +58,8 @@ const Index = () => {
             title="How To Join"
             subtitle="zelosmp.serv.cx"
             image={joinCard}
-            to="/"
+            to="https://youtu.be/_aLvfwDUl68"
+            external
           />
           <LinkCard
             title="JOIN OFFICALZELONET ON TWITCH"
