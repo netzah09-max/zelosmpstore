@@ -2,6 +2,7 @@ import { ShoppingCart, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
+import ServerStatus from "@/components/ServerStatus";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +24,7 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-6">
+          <ServerStatus />
           {navLinks.map((link) => (
             <Link
               key={link.path}

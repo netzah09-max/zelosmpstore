@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const ServerIPBadge = () => {
   const [copied, setCopied] = useState(false);
-  const ip = "zelosmp.serv.cx";
+  const ip = "zelosmp.net";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(ip);

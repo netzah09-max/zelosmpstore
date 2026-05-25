@@ -56,7 +56,7 @@ const Index = () => {
           />
           <LinkCard
             title="How To Join"
-            subtitle="zelosmp.serv.cx"
+            subtitle="zelosmp.net"
             image={joinCard}
             to="https://youtu.be/_aLvfwDUl68"
             external
